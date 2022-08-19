@@ -1,0 +1,54 @@
+<div>
+  <h5 class="card-title">Consulta de Funcionários</h5>
+  <p class="card-text">Listagem de Funcionários Cadastrados.</p>
+  <hr />
+
+  <div class="mb-3">
+    <strong>{{mensagem}}</strong>
+  </div>
+
+  <table class="table table-hover table-sm">
+    <thead>
+      <tr>
+        <th>Nome do Funcionário</th>
+        <th>CPF</th>
+        <th>Matrícula</th>
+        <th>Data de Admissão</th>
+        <th>Empresa</th>
+        <th>Operações</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let f of funcionarios"> <!-- varrendo a lista de funcionarios -->
+        <td>{{f.nome}}</td>
+        <td>{{f.cpf}}</td>
+        <td>{{f.matricula}}</td>
+        <td>{{f.dataAdmissao | date : 'dd/MM/yyyy'}}</td>
+        <td>
+            {{f.empresa.nomeFantasia}} <br/>
+            <small>CNPJ: {{f.empresa.cnpj}}</small>
+        </td>
+        <td>
+            <button class="btn btn-primary btn-sm"
+                    [routerLink]="['/funcionarios-edicao', f.idFuncionario]">Editar
+            </button> &nbsp;
+
+            <button class="btn btn-danger btn-sm"
+                    (click)="onDelete(f.idFuncionario)">Excluir
+            </button>
+
+        </td>
+      </tr>
+    </tbody>
+
+    <tfoot>
+      <tr>
+        <td colspan="6">
+          Quantidade de funcionários: {{funcionarios.length}}
+        </td>
+      </tr>
+    </tfoot>
+
+  </table>
+</div>
