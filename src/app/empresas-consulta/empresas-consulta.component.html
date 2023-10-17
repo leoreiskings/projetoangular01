@@ -1,0 +1,50 @@
+<div>
+  <h5 class="card-title">Consulta de Empresas</h5>
+  <p class="card-text">Listagem de empresas cadastradas.</p>
+  <hr />
+
+  <div class="mb-3">
+    <strong>{{mensagem}}</strong>
+  </div>
+
+
+  <table class="table table-hover table-sm">
+    <thead>
+      <tr>
+        <th>Nome Fantasia</th>
+        <th>Razão Social</th>
+        <th>CNPJ</th>
+        <th>Operações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let e of empresas">
+        <td>{{e.nomeFantasia}}</td>
+        <td>{{e.razaoSocial}}</td>
+        <td>{{e.cnpj}}</td>
+        <td>
+          <button class="btn btn-primary btn-sm"
+          [routerLink]="['/empresas-edicao', e.idEmpresa]">
+            Editar
+          </button>
+
+          &nbsp;
+
+          <button class="btn btn-danger btn-sm"
+            (click)="onDelete(e.idEmpresa)">
+            Excluir
+          </button>
+        </td>
+      </tr>
+    </tbody>
+
+    <tfoot>
+      <tr>
+        <td colspan="4">
+          Quantidade de empresas: {{empresas.length}}
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+
+</div>

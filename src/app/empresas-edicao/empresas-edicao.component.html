@@ -1,0 +1,49 @@
+<div>
+  <h5 class="card-title">Edição de Empresas</h5>
+  <p class="card-text">Utilize os campos para alterar os dados da empresa.</p>
+  <hr />
+
+  <form [formGroup]="formEdicao" (ngSubmit)="onSubmit()">
+
+    <!-- campo oculto para recuperar o idEmpresa-->
+    <input type="hidden" formControlName="idEmpresa" />
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+
+        <label>Nome Fantasia da empresa:</label>
+        <input type="text" class="form-control"
+              placeholder="Digite aqui" formControlName="nomeFantasia" />
+        <div class="text-danger" *ngIf="form.nomeFantasia.touched && form.nomeFantasia.invalid">
+          Por favor, informe o nome fantasia da empresa.
+        </div>
+
+      </div>
+      <div class="col-md-3">
+        <label>Razão Social:</label>
+        <input type="text" class="form-control" placeholder="Digite aqui" formControlName="razaoSocial" />
+        <div class="text-danger" *ngIf="form.razaoSocial.touched && form.razaoSocial.invalid">
+          Por favor, informe a razão social da empresa.
+        </div>
+      </div>
+      <div class="col-md-3">
+        <label>CNPJ:</label>
+        <input type="text" class="form-control" placeholder="Digite aqui" formControlName="cnpj" />
+        <div class="text-danger" *ngIf="form.cnpj.touched && form.cnpj.invalid">
+          Por favor, informe o cnpj da empresa.
+        </div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-12">
+        <input type="submit" class="btn btn-primary" value="Salvar Alterações" [disabled]="!formEdicao.valid" />
+      </div>
+    </div>
+
+    <div class="mt-3">
+        <strong>{{mensagem}}</strong>
+    </div>
+
+
+  </form>
+</div>
