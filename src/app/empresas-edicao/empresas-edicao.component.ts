@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-empresas-edicao',
@@ -24,7 +25,7 @@ export class EmpresasEdicaoComponent implements OnInit {
     const id = this.activatedRoute.snapshot.paramMap.get('id') as string;
 
     //consultar os dados da empresa na API através do id
-    this.httpClient.get('http://localhost:8080/api/empresas/' + id)
+    this.httpClient.get(environment.apiUrl + 'api/empresas/' + id)
       .subscribe({
         next: (result) => {
           //preencher o formulário com os dados da empresa
@@ -53,9 +54,8 @@ export class EmpresasEdicaoComponent implements OnInit {
 
   //função para executar o submit do formulário
   onSubmit(): void {
-
-    this.httpClient.put( //Requisição HTTP PUT (edição)
-      'http://localhost:8080/api/empresas', //ENDPOINT da API
+    //Requisição HTTP PUT (edição)
+    this.httpClient.put(environment.apiUrl + 'api/empresas', //ENDPOINT da API
       this.formEdicao.value, //dados que serão enviados
       { responseType: 'text' } //tipo de resposta que será obtida
     )

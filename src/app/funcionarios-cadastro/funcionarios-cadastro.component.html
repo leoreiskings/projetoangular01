@@ -1,38 +1,71 @@
 <div>
-	<h5 class="card-title">Cadastro de Funcionários</h5>
-	<p class="card-text">Preencha os campos para incluir um funcionário.</p>
-<hr />
-<form>
-	<div class="row mb-3">
-		<div class="col-md-6">
-			<label>Nome do funcionário:</label>
-			<input type="text" class="form-control"	placeholder="Digite aqui" />
-		</div>
-		<div class="col-md-3">
-			<label>CPF:</label>
-			<input type="text" class="form-control" placeholder="Digite aqui" />
-		</div>
-		<div class="col-md-3">
-			<label>Matrícula:</label>
-			<input type="text" class="form-control"	placeholder="Digite aqui" />
-		</div>
-	</div>
-	<div class="row mb-3">
-		<div class="col-md-3">
-			<label>Data de admissão:</label>
-			<input type="date" class="form-control" />
-		</div>
-		<div class="col-md-9">
-			<label>Selecione a empresa do funcionário:</label>
-			<select class="form-select">
-				<option value="">Escolha uma opção</option>
-			</select>
-		</div>  
-	</div>
-	<div class="row mb-3">
-		<div class="col-md-12">
-			<input type="submit" class="btn btn-success" value="Realizar Cadastro" />
-		</div>
-	</div>
-	</form>
+  <h5 class="card-title">Cadastro de Funcionários</h5>
+  <p class="card-text">Preencha os campos para incluir um funcionário.</p>
+
+  <hr />
+
+  <!-- formCadastro é o mesmo nome dado no formulario do typescript
+      enviando os dados recuperados do formulario para a função "onSubmit()"-->
+  <form [formGroup]="formCadastro" (ngSubmit)="onSubmit()">
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label>Nome do funcionário:</label>
+        <input type="text" class="form-control" placeholder="Digite aqui"
+              formControlName="nome" />
+        <div class="text-danger" *ngIf="form.nome.touched && form.nome.invalid">
+          Por favor, informe o nome do funcionário.
+        </div>
+      </div>
+      <div class="col-md-3">
+        <label>CPF:</label>
+        <input type="text" class="form-control" placeholder="Digite aqui"
+              formControlName="cpf" />
+        <div class="text-danger" *ngIf="form.cpf.touched && form.cpf.invalid">
+          Por favor, informe o cpf do funcionário.
+        </div>
+      </div>
+      <div class="col-md-3">
+        <label>Matrícula:</label>
+        <input type="text" class="form-control" placeholder="Digite aqui"
+              formControlName="matricula" />
+        <div class="text-danger" *ngIf="form.matricula.touched && form.matricula.invalid">
+          Por favor, informe a matrícula do funcionário.
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <label>Data de admissão:</label>
+        <input type="date" class="form-control" formControlName="dataAdmissao" />
+        <div class="text-danger" *ngIf="form.dataAdmissao.touched && form.dataAdmissao.invalid">
+          Por favor, informe a data de admissão do funcionário.
+        </div>
+      </div>
+
+      <div class="col-md-9">
+        <label>Selecione a empresa do funcionário:</label>
+        <select class="form-select" formControlName="idEmpresa">
+          <option value="">Escolha uma opção:</option>
+          <option *ngFor="let e of empresas" value="{{e.idEmpresa}}">
+          {{e.nomeFantasia}} - CNPJ: {{e.cnpj}}
+          </option>
+        </select>
+        <div class="text-danger" *ngIf="form.idEmpresa.touched && form.idEmpresa.invalid">
+          Por favor, selecione a empresa do funcionário.
+        </div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-12">
+        <input type="submit" class="btn btn-success"
+               value="Realizar Cadastro" [disabled]="!formCadastro.valid" />
+      </div>
+    </div>
+  </form>
+
+  <div class="mt-3">
+    <strong>{{mensagem}}</strong>
+  </div>
+
 </div>

@@ -1,33 +1,62 @@
 <nav class="navbar navbar-expand-lg bg-primary navbar-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Projeto Angular Web - [Controle de Empresas e Funcionários]</a>
-    <button class="navbar-toggler" type="button" data-bstoggle="collapse" data-bs-target="#navbarSupportedContent"
-      ariacontrols="navbarSupportedContent" aria-expanded="false" arialabel="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+    <a class="navbar-brand" href="#">Projeto Angular Web</a>
+    <button class="navbar-toggler" type="button" data-bstoggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
+        <li class="nav-item" *ngIf="!usuarioAutenticado">
+          <a class="nav-link" aria-current="page" routerLink="login">
+            Acessar sistema
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="!usuarioAutenticado">
+          <a class="nav-link" aria-current="page" routerLink="registration">
+            Criar Conta
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="!usuarioAutenticado">
+          <a class="nav-link" aria-current="page" routerLink="password-recover">
+            Esqueci minha senha
+          </a>
+        </li>
+        <li class="nav-item dropdown" *ngIf="usuarioAutenticado">
+          <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+              role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Gerenciar Empresas
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" routerLink="empresas-cadastro">Cadastrar Empresas</a></li>
-            <li><a class="dropdown-item" routerLink="empresas-consulta">Consultar Empresas</a></li>
+            <li><a class="dropdown-item" routerLink="empresascadastro">Cadastrar Empresas</a></li>
+            <li><a class="dropdown-item" routerLink="empresasconsulta">Consultar Empresas</a></li>
           </ul>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
+
+        <li class="nav-item dropdown" *ngIf="usuarioAutenticado">
+          <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+              role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Gerenciar Funcionários
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" routerLink="funcionarios-cadastro">Cadastrar Funcionários</a></li>
-            <li><a class="dropdown-item" routerLink="funcionarios-consulta">Consultar Funcionários</a></li>
+            <li><a class="dropdown-item" routerLink="funcionarioscadastro">Cadastrar Funcionários</a></li>
+            <li><a class="dropdown-item" routerLink="funcionariosconsulta">Consultar Funcionários</a></li>
           </ul>
         </li>
+
       </ul>
+    </div>
+    <div class="collapse navbar-collapse" *ngIf="usuarioAutenticado">
+      <p class="navbar-text" style="margin: 0;">
+        <span>
+          Seja bem vindo, <strong class="text-white">{{usuarioEmail}}</strong>
+          <br />
+          <button class="btn btn-sm btn-light mt-2" (click)="logout()">
+            Sair do sistema
+          </button>
+        </span>
+      </p>
     </div>
   </div>
 </nav>
@@ -38,7 +67,4 @@
       <router-outlet></router-outlet>
     </div>
   </div>
-
-
-
 </div>

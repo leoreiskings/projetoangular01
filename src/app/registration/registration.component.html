@@ -1,0 +1,57 @@
+<div>
+  <h5 class="card-title">Crie sua conta de usuário</h5>
+  <p class="card-text">Informe seus dados para criar uma conta de usuário na aplicação.</p>
+  <div class="row">
+    <div class="col-md-6">
+
+        <form [formGroup]="formRegistration" (ngSubmit)="onSubmit()">
+          <div class="row mb-3">
+            <label for="nome" class="col-sm-4 col-form-label">Nome completo:</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="nome" formControlName="nome">
+                <div class="text-danger" *ngIf="form.nome.touched && form.nome.invalid">
+                Por favor, informe o nome.
+                </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="email" class="col-sm-4 col-form-label">Endereço de email:</label>
+            <div class="col-sm-8">
+              <input type="email" class="form-control" id="email" formControlName="email">
+              <div class="text-danger" *ngIf="form.email.touched && form.email.invalid">
+                Por favor, informe o email.
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="senha" class="col-sm-4 col-form-label">Senha de acesso:</label>
+            <div class="col-sm-8">
+              <input type="password" class="form-control" id="senha" formControlName="senha">
+              <div class="text-danger" *ngIf="form.senha.touched && form.senha.invalid">
+                Por favor, informe a senha.
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="senhaConfirmacao" class="col-sm-4 colform-label">Confirme sua senha:</label>
+            <div class="col-sm-8">
+              <input type="password" class="form-control" id="senhaConfirmacao" formControlName="senhaConfirmacao">
+              <div class="text-danger" *ngIf="form.senhaConfirmacao.touched && form.senhaConfirmacao.invalid">
+                Por favor, confirme sua senha.
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="!formRegistration.valid">
+            Realizar Cadastro
+          </button>
+          &nbsp;
+          <a [routerLink]="['/login']" class="btn btn-light">
+            Já possui conta? <strong>Acesse aqui!</strong>
+          </a>
+        </form>
+        <div class="mt-3 mb-3">
+          <strong>{{mensagem}}</strong>
+        </div>
+    </div>
+  </div>
+</div>

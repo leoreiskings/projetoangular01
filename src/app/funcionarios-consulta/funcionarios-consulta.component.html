@@ -14,22 +14,34 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+      <tr *ngFor="let f of funcionarios">
+        <td>{{f.nome}}</td>
+        <td>{{f.cpf}}</td>
+        <td>{{f.matricula}}</td>
+        <td>{{f.dataAdmissao | date : 'dd/MM/yyyy'}}</td>
         <td>
-          <button class="btn btn-primary btn-sm">Editar</button>
+          {{f.empresa.nomeFantasia}} <br />
+          <small>CNPJ: {{f.empresa.cnpj}}</small>
+        </td>
+        <td>
+
+          <button class="btn btn-primary btn-sm"
+          [routerLink]="['/funcionarios-edicao', f.idFuncionario]">
+          Editar
+          </button>
+
           &nbsp;
-          <button class="btn btn-danger btn-sm">Excluir</button>
+          <button class="btn btn-danger btn-sm"
+          (click)="onDelete(f.idFuncionario)">
+          Excluir
+        </button>
         </td>
       </tr>
     </tbody>
     <tfoot>
       <tr>
-        <td colspan="6">Quantidade de funcionários: 0
+        <td colspan="6">
+          Quantidade de funcionários: {{funcionarios.length}}
         </td>
       </tr>
     </tfoot>

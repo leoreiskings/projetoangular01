@@ -1,0 +1,41 @@
+<div>
+  <h5 class="card-title">Acessar sistema</h5>
+  <p class="card-text">Informe suas credenciais para acessar a aplicação.</p>
+  <div class="row">
+    <div class="col-md-6">
+      <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+        <div class="row mb-3">
+          <label for="email" class="col-sm-4 col-form-label">Email de acesso:</label>
+          <div class="col-sm-8">
+            <input type="email" class="form-control" id="email" formControlName="email">
+            <div class="text-danger" *ngIf="form.email.touched && form.email.invalid">
+              Por favor, informe seu email de acesso.
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="senha" class="col-sm-4 col-form-label">Senha de acesso:</label>
+          <div class="col-sm-8">
+            <input type="password" class="form-control" id="senha" formControlName="senha">
+            <div class="text-danger" *ngIf="form.senha.touched && form.senha.invalid">
+              Por favor, informe sua senha de acesso.
+            </div>
+            <a [routerLink]="['/password-recover']">Esqueci minha senha.</a>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="!formLogin.valid">
+          Acessar Conta
+        </button>
+        &nbsp;
+        <a [routerLink]="['/registration']" class="btn btn-light">
+          Não possui conta? <strong>Cadastre-se aqui!</strong>
+        </a>
+      </form>
+
+      <div class="mt-3 mb-3">
+        <strong>{{mensagem}}</strong>
+      </div>
+
+    </div>
+  </div>
+</div>

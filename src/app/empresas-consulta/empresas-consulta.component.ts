@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-empresas-consulta',
@@ -21,7 +23,7 @@ export class EmpresasConsultaComponent implements OnInit {
   //essa funcao carrega antes da pagina ser carregada
   ngOnInit(): void {
     //Requisição HTTP GET (consulta)
-    this.httpClient.get('http://localhost:8080/api/empresas')
+    this.httpClient.get(environment.apiUrl + 'api/empresas')
       .subscribe({//recuperando o retorno da API
 
         next: (result) => { //retorno de erro da API
@@ -38,7 +40,7 @@ export class EmpresasConsultaComponent implements OnInit {
 
     if (window.confirm('Deseja realmente excluir esta Empresa?')) {
 
-      this.httpClient.delete('http://localhost:8080/api/empresas/' + idEmpresa,
+      this.httpClient.delete(environment.apiUrl + 'api/empresas/' + idEmpresa,
         { responseType: 'text' })//ENDPOINT da API
         .subscribe({
           next: (result) => {

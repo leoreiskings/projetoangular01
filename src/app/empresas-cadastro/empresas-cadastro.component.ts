@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-empresas-cadastro',
   templateUrl: './empresas-cadastro.component.html',
@@ -37,10 +37,13 @@ export class EmpresasCadastroComponent implements OnInit {
 
   //função para ser executada no SUBMIT do formulário
   onSubmit(): void {
+
     //Requisição HTTP POST (cadastro)
-    this.httpClient.post('http://localhost:8080/api/empresas', //ENDPOINT da API
-    this.formCadastro.value, //dados que serão enviados
-    { responseType: 'text' } //tipo de resposta que será obtida
+    this.httpClient.post(
+      environment.apiUrl + 'api/empresas', //ENDPOINT da API
+      this.formCadastro.value, //dados que serão enviados
+      { responseType: 'text' } //tipo de resposta que será obtida
+
     )
       .subscribe({ //capturar a resposta obtida da API
 
