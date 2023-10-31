@@ -33,6 +33,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmit(): void {
+    
     this.httpClient.post(
       environment.apiLoginUrl + "api/registration",
       this.formRegistration.value,

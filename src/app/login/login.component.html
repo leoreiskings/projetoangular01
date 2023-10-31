@@ -3,7 +3,9 @@
   <p class="card-text">Informe suas credenciais para acessar a aplicação.</p>
   <div class="row">
     <div class="col-md-6">
+
       <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+        
         <div class="row mb-3">
           <label for="email" class="col-sm-4 col-form-label">Email de acesso:</label>
           <div class="col-sm-8">

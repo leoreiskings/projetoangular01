@@ -13,7 +13,7 @@ export class AppComponent {
 
   //construtor
   constructor() {
-    //verificar se existe um token salvo na local storage
+    //verifica se existe um token salvo na local storage
     if (localStorage.getItem("access_token") != null) {
       this.usuarioAutenticado = true;
       this.usuarioEmail = localStorage.getItem("email_usuario") as string;

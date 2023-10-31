@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TokenInterceptor } from './_interceptors/token-interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthorizationGuard } from './_guards/AuthorizationGuard';
+import { AuthorizationGuard } from './_guards/authorization-guards';
 
 import { AppComponent } from './app.component';
 import { EmpresasCadastroComponent } from './empresas-cadastro/empresas-cadastro.component';
@@ -19,6 +19,9 @@ import { RegistrationComponent } from './registration/registration.component';
 import { PasswordRecoverComponent } from './password-recover/password-recover.component';
 
 //mapeamento de rotas
+//As rotas que tem canActivate: [AuthorizationGuard] exigem que o usuario esteja autenticado para acessá-las
+//As rotas de 'login' , 'registration' , 'password-recover' não exigem autenticação para carregar seus links
+
 const routes: Routes = [
   { path : '', pathMatch: 'full', redirectTo : 'login' }, //elegendo esta pagina como a 1ª a ser carregada
   { path: 'login', component: LoginComponent },
@@ -30,6 +33,7 @@ const routes: Routes = [
   { path: 'funcionarios-cadastro', component: FuncionariosCadastroComponent, canActivate: [AuthorizationGuard] },
   { path: 'funcionarios-consulta', component: FuncionariosConsultaComponent, canActivate: [AuthorizationGuard] },
   { path: 'funcionarios-edicao/:id', component: FuncionariosEdicaoComponent, canActivate: [AuthorizationGuard] }
+
 ];
 
 @NgModule({
@@ -56,10 +60,11 @@ const routes: Routes = [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
-      multi: true // true nos habilita para criar outros interceptadores
-      },
+      multi: true // valor igual a 'true' nos habilita para criar outros interceptadores
+    },
       AuthorizationGuard
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

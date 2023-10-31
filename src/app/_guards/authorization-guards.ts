@@ -5,6 +5,7 @@ import { Injectable } from "@angular/core";
 export class AuthorizationGuard implements CanActivate {
 
   canActivate() {
+
     //verificando se há um token de autorização na localstorage
     if (localStorage.getItem('access_token') != null) {
       return true;
